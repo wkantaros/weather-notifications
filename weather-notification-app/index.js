@@ -23,6 +23,6 @@ app.post('/createUser', (req, res) => {
         .then(() => res.sendStatus(200))
 });
 
-app.listen(4000, () => {
-    console.log('App listening on port 4000')
-});
+app.listen(7555, () => {
+    console.log('Server running on http://localhost:7555')
+})

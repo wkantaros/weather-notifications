@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-console.log(process.env.ACCOUNT_SID);
 const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const trialNumber = process.env.TRIAL_NUMBER;
