@@ -5,6 +5,13 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+		<script>
+			$(document).ready(function ($) {
+				$("#number").mask('(999) 999-9999');
+			});
+		</script>
 	</head>
 	<body class="is-preload">
 
@@ -17,7 +24,7 @@
 
 		<!-- Signup Form -->
 			<form id="signup-form"> <!-- method="post" action="/handler"> -->
-				<input type="number" name="number" id="number" placeholder="US Number" />
+				<input type="tel" name="number" id="number" placeholder="Enter US Number" />
 				<input type="submit" value="Sign Up" />
 			</form>
 

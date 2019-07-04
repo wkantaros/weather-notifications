@@ -4,6 +4,9 @@ const path = require('path');
 
 const bodyParser = require('body-parser');
 const user = require('./user');
+const users = require('./users');
+const sms = require('./smsService');
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json())
@@ -16,11 +19,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/createUser', (req, res) => {
-    user
-        .createUser({
-            number: req.body.number
-        })
-        .then(() => res.sendStatus(200))
+    let User = user.User;
+    let phoneNumber = req.body.phoneNumber;
+    console.log(`Phone number ${phoneNumber} added to database`); // not really a database
+     
+    // let newUser = new User(phoneNumber, null);
+    // sms.askForZipCode(newUser);
+    // users.addUser(newUser);    
+    // res.sendStatus(200); 
 });
 
 app.listen(7555, () => {

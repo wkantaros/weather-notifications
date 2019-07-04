@@ -131,6 +131,7 @@
 				};
 
 				$message._hide = function() {
+					$message.classList.remove('failure');
 					$message.classList.remove('visible');
 				};
 
@@ -149,14 +150,18 @@
 					// Enable submit.
 					$submit.disabled = false;
 
-					// Show message.
-					$message._show('success', 'Thank you!');
-					// $message._show('failure', 'Something went wrong. Please try again.');
+					// Show message.					
+					if (number)
+						$message._show('success', 'Thank you!');
+					else
+						$message._show('failure', 'Please enter a valid US phone number');
 
 				}, 750);
-				post('/createUser', {
-					number
-				});
+				if (number){
+					let phoneNumber = number.replace(/[^\d]/g, "");
+					post('/createUser', { phoneNumber });
+				}
+					
 			})
 
 			function post(path, data) {

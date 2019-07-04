@@ -1,6 +1,11 @@
-module.exports = {
-  createUser ({ number }) {
-    console.log(`Add user with phone number ${number}`);
-    return Promise.resolve();
+
+class User {
+  constructor(phoneNumber, zipCode) {
+    this.phoneNumber = phoneNumber;
+    this.zipCode = zipCode;
   }
+}
+
+module.exports = {
+  User: User
 }
