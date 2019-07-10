@@ -47,7 +47,7 @@ app.post('/sms', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
-    var j = schedule.scheduleJob('0 16 * * *', () => {
+    var j = schedule.scheduleJob('0 17 * * *', () => {
         console.log(users.getUsers());
         sms.returnWeatherInformation(users.getUsers());
     });
