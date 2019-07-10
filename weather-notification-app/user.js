@@ -1,11 +1,11 @@
 
-class User {
-  constructor(phoneNumber, zipCode) {
-    this.phoneNumber = phoneNumber;
-    this.zipCode = zipCode;
-  }
-}
+// class User {
+//   constructor(phoneNumber, zipCode) {
+//     this.phoneNumber = phoneNumber;
+//     this.zipCode = zipCode;
+//   }
+// }
 
-module.exports = {
-  User: User
-}
+// module.exports = {
+//   User: User
+// }

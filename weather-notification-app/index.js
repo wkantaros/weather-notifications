@@ -3,15 +3,16 @@ const app = express();
 const path = require('path');
 
 const bodyParser = require('body-parser');
-const user = require('./user');
 const users = require('./users');
 const sms = require('./smsService');
+const w = require('./weather');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const schedule = require('node-schedule');
+
 
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json())
-
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
@@ -19,16 +20,34 @@ app.get('/', (req, res) => {
 });
 
 app.post('/createUser', (req, res) => {
-    let User = user.User;
     let phoneNumber = req.body.phoneNumber;
-    console.log(`Phone number ${phoneNumber} added to database`); // not really a database
-     
-    // let newUser = new User(phoneNumber, null);
-    // sms.askForZipCode(newUser);
-    // users.addUser(newUser);    
-    // res.sendStatus(200); 
+    console.log(`Sending text to ${phoneNumber}`); 
+    sms.askForZipCode(phoneNumber);
+    res.send();
 });
 
-app.listen(7555, () => {
-    console.log('Server running on http://localhost:7555')
-})
+app.post('/sms', (req, res) => {
+    let User = users.User;
+    let phoneNumber = req.body.From;
+    let zipcode = req.body.Body;
+
+    let newUser = new User(phoneNumber, zipcode);
+    users.addUser(newUser);
+    console.log(`Phone number ${phoneNumber} with zipcode ${zipcode} added to database`); // not really a database
+
+
+    const twiml = new MessagingResponse();
+    twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);
+    res.writeHead(200, {
+        'Content-Type': 'text/xml'
+    });
+    res.end(twiml.toString());
+});
+
+app.listen(1337, () => {
+    console.log('Server running on https://localhost:1337');
+    var j = schedule.scheduleJob('31 10 * * *', () => {
+        console.log(users.getUsers());
+        sms.returnWeatherInformation(users.getUsers());
+    });
+});

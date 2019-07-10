@@ -132,6 +132,7 @@
 
 				$message._hide = function() {
 					$message.classList.remove('failure');
+					$message.classList.remove('success');
 					$message.classList.remove('visible');
 				};
 
@@ -159,12 +160,14 @@
 				}, 750);
 				if (number){
 					let phoneNumber = number.replace(/[^\d]/g, "");
+					console.log('here!');
 					post('/createUser', { phoneNumber });
 				}
 					
 			})
 
 			function post(path, data) {
+				console.log('here!');
 				return window.fetch(path, {
 					method: 'POST',
 					headers: {

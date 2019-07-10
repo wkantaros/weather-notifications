@@ -7,26 +7,43 @@ const trialNumber = process.env.TRIAL_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
-
 const users = require('./users');
-const User = require('./user');
+const w = require('./weather');
 
-let askForZipCode = (user) => {
-    console.log(`Number: ${user.phoneNumber}`);
+// takes in a string (10 digit phone number)
+let askForZipCode = (phoneNumber) => {
     client.messages.create({
-        to: `+18455189455`,
+        to: phoneNumber,
         from: trialNumber,
-        body: 'Hi there! Please text us your zip code so we can send you weather information about the area' 
+        body: 'Please enter the zip code you would like to recieve data for'
     })
     .then(message => console.log(message.sid));
 }
 
-module.exports.askForZipCode = askForZipCode;
+let returnWeatherInformation = (users) => {
+    for (let i in users) {
+        let zip = users[i].zipCode;
+        let userNumber = users[i].phoneNumber;
+        w.getMessageData(zip).then((responseToUser) => {
+            client.messages.create({
+                to: userNumber,
+                from: trialNumber,
+                body: responseToUser
+            })
+            .then(message => console.log(message.sid));
+        })
+    }
+}
 
-// client.messages
-//     .create({
-//         body: `test env`,
-//         from: trialNumber,
-//         to: willNum
-//     })
-//     .then(message => console.log(message.sid));
+// let test = () => {
+//     let User = users.User;
+//     let user1 = new User('18453992443', '12580');
+//     users.addUser(user1);
+//     let user2 = new User('18455189455', '10001');
+//     users.addUser(user2);
+//     returnWeatherInformation(users.getUsers());
+// }
+// test();
+
+module.exports.askForZipCode = askForZipCode;
+module.exports.returnWeatherInformation = returnWeatherInformation;
