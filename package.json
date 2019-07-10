@@ -1,7 +1,7 @@
 {
   "name": "sideprojects",
   "version": "1.0.0",
-  "description": "A list of side projects I may build over the next few months",
+  "description": "A weather notification app that texts daily updates on local weather",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

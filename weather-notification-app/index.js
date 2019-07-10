@@ -45,7 +45,7 @@ app.post('/sms', (req, res) => {
 });
 
 app.listen(1337, () => {
-    console.log('Server running on https://localhost:1337');
+    console.log('Server running on http://localhost:1337');
     var j = schedule.scheduleJob('0 6 * * *', () => {
         console.log(users.getUsers());
         sms.returnWeatherInformation(users.getUsers());
