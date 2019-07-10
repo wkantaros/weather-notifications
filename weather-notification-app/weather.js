@@ -20,4 +20,5 @@ let getMessageData = (zip) => {
 
 module.exports.getMessageData = getMessageData;
 
-let cToFahr = (cTemp) => cTemp * 9 / 5 + 32;
+// helper method that rounds to nearest tenth
+let cToFahr = (cTemp) => Math.round(10 * (cTemp * 9 / 5 + 32)) / 10; 
