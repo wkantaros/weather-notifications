@@ -3,6 +3,8 @@ require('dotenv').config();
 const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const trialNumber = process.env.TRIAL_NUMBER;
+console.log(accountSid);
+
 
 const client = require('twilio')(accountSid, authToken);
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
