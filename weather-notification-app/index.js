@@ -50,7 +50,7 @@ app.listen(PORT, () => {
     //     console.log(users.getUsers());
     //     sms.returnWeatherInformation(users.getUsers());
     // });
-    var j = schedule.scheduleJob({hour: 11, minute: 13}, () => {
+    var j = schedule.scheduleJob('20 * * * *', () => {
         console.log(users.getUsers());
         sms.returnWeatherInformation(users.getUsers());
     });
