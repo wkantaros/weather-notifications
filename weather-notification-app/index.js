@@ -28,8 +28,6 @@ app.post('/createUser', (req, res) => {
 });
 
 app.post('/sms', (req, res) => {
-    console.log('here kinda!');
-    
     let User = users.User;
     let phoneNumber = req.body.From;
     let zipcode = req.body.Body;
@@ -38,13 +36,8 @@ app.post('/sms', (req, res) => {
     users.addUser(newUser);
     console.log(`Phone number ${phoneNumber} with zipcode ${zipcode} added to database`); // not really a database
 
-
     const twiml = new MessagingResponse();
-    console.log('here!');
-    
-    twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);
-    console.log('here baud');
-    
+    twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);    
     res.writeHead(200, {
         'Content-Type': 'text/xml'
     });
@@ -57,7 +50,7 @@ app.listen(PORT, () => {
     //     console.log(users.getUsers());
     //     sms.returnWeatherInformation(users.getUsers());
     // });
-    var j = schedule.scheduleJob({hour: 11, minute: 7}, () => {
+    var j = schedule.scheduleJob({hour: 11, minute: 13}, () => {
         console.log(users.getUsers());
         sms.returnWeatherInformation(users.getUsers());
     });
