@@ -42,7 +42,7 @@ app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
     console.log('here!');
     
-    // twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);
+    twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);
     console.log('here baud');
     
     res.writeHead(200, {
@@ -57,7 +57,7 @@ app.listen(PORT, () => {
     //     console.log(users.getUsers());
     //     sms.returnWeatherInformation(users.getUsers());
     // });
-    var j = schedule.scheduleJob({hour: 11, minute: 6}, () => {
+    var j = schedule.scheduleJob({hour: 11, minute: 7}, () => {
         console.log(users.getUsers());
         sms.returnWeatherInformation(users.getUsers());
     });
