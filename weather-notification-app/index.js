@@ -47,10 +47,14 @@ app.post('/sms', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
-    var j = schedule.scheduleJob('*/2 * * * *', () => {
-        console.log(users.getUsers());
-        sms.returnWeatherInformation(users.getUsers());
-    });
+    // var j = schedule.scheduleJob('*/2 * * * *', () => {
+    //     console.log(users.getUsers());
+    //     sms.returnWeatherInformation(users.getUsers());
+    // });
+    // var j = schedule.scheduleJob({hour: 10, minute: 52}, () => {
+    //     console.log(users.getUsers());
+    //     sms.returnWeatherInformation(users.getUsers());
+    // });
     // var j = schedule.scheduleJob('0 6 * * *', () => {
     //     console.log(users.getUsers());
     //     sms.returnWeatherInformation(users.getUsers());
