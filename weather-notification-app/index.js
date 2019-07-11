@@ -28,6 +28,8 @@ app.post('/createUser', (req, res) => {
 });
 
 app.post('/sms', (req, res) => {
+    console.log('here kinda!');
+    
     let User = users.User;
     let phoneNumber = req.body.From;
     let zipcode = req.body.Body;
@@ -38,7 +40,11 @@ app.post('/sms', (req, res) => {
 
 
     const twiml = new MessagingResponse();
-    twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);
+    console.log('here!');
+    
+    // twiml.message(`Thanks! You will now get weather information for the ${zipcode}`);
+    console.log('here baud');
+    
     res.writeHead(200, {
         'Content-Type': 'text/xml'
     });
@@ -51,10 +57,10 @@ app.listen(PORT, () => {
     //     console.log(users.getUsers());
     //     sms.returnWeatherInformation(users.getUsers());
     // });
-    // var j = schedule.scheduleJob({hour: 10, minute: 52}, () => {
-    //     console.log(users.getUsers());
-    //     sms.returnWeatherInformation(users.getUsers());
-    // });
+    var j = schedule.scheduleJob({hour: 10, minute: 56}, () => {
+        console.log(users.getUsers());
+        sms.returnWeatherInformation(users.getUsers());
+    });
     // var j = schedule.scheduleJob('0 6 * * *', () => {
     //     console.log(users.getUsers());
     //     sms.returnWeatherInformation(users.getUsers());
